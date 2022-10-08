@@ -1,0 +1,17 @@
+.cards__delete-button{
+    background: unset;
+    background-image: url(../../../images/bin.png);
+    border: none;
+    align-self: center;
+    position: absolute;
+    padding: 0;
+    right: 20px;
+    top: 20px;
+    width: 18px;
+    height: 20px;
+}
+
+.cards__delete-button:hover{
+    cursor: pointer;
+    opacity: 0.6;
+}

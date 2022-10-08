@@ -1,0 +1,33 @@
+.profile__avatar-container{
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    position: relative;
+    padding: 0;
+}
+
+.profile__avatar-container::before{
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    content: '';
+}
+
+.profile__avatar-container:hover::before{
+    background: no-repeat url(../../../images/Pen.svg) rgb(0, 0, 0, 0.8);
+    background-position: center;
+    cursor: pointer;
+}
+
+@media (max-width: 590px){
+    .profile__avatar-container::before{
+        margin: 0 0 26px 0;
+        align-self: center;
+    }
+}

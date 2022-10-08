@@ -1,0 +1,6 @@
+.popup__input_type_dark-theme{
+    margin: 0 0 30px;
+    color: white;
+    background: unset;
+    border-bottom: 2px solid rgba(204, 204, 204, 0.8);
+}

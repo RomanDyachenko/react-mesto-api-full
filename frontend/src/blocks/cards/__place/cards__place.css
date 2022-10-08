@@ -1,0 +1,7 @@
+.cards__place{
+   position: relative;
+   display: grid;
+   border-radius: 10px;
+   overflow: hidden;
+   max-width: 282px;
+}

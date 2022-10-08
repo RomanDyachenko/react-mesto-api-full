@@ -1,0 +1,20 @@
+.popup__span-error{
+    margin-top: 5px;
+    color: #FF0000;
+    font-family: "Inter", "Arial", "Helvetica", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 1.21;
+    margin: 0;
+    margin-left: 36px;
+    min-height: 29px;
+    max-width: 358px;
+    visibility: hidden;
+}
+
+@media (max-width: 550px){
+    .popup__span-error{
+        margin-left: 22px;
+    }
+}

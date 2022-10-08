@@ -1,0 +1,18 @@
+.profile__avatar-button{
+    display: flex;
+    justify-content: center;
+    margin: 0 30px 0 0;
+    padding: 0;
+    width: 120px;
+    height: 120px;
+    outline: none !important;
+    border: none;
+    border-radius: 50%;
+}
+
+@media (max-width: 590px){
+    .profile__avatar-button{
+        margin: 0 0 26px 0;
+        align-self: center;
+    }
+}

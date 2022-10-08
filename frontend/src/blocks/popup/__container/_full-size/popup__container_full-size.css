@@ -1,0 +1,7 @@
+.popup__container_full-size{
+    position: relative;
+    width: unset;
+    height: unset;
+    border-radius: unset;
+    background: none;
+}

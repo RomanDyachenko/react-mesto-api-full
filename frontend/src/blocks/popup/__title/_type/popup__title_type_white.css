@@ -1,0 +1,6 @@
+.popup__title_type_white{
+    color: white;
+    justify-content: center;
+    max-width: unset;
+    margin: 60px 0 50px;
+}

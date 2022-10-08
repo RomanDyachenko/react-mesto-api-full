@@ -1,0 +1,25 @@
+.header__link{
+    width: fit-content;
+    height: fit-content;
+    font-style: unset;
+    text-decoration: none;
+    margin-bottom: 46px;
+    display: flex;
+    font-family: "Inter", "Arial", "Helvetica", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.22;
+    color: white;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 51px 0 46px 0;
+    background-color: unset;
+    border: none;
+}
+
+.header__link:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}
