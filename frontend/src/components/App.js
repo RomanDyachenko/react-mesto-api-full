@@ -16,6 +16,7 @@ import Register from "./Register.js";
 import { InfoTooltip } from "./InfoTooltip.js";
 import { ProtectedRoute } from "./ProtectedRoute.js";
 
+
 function App(props) {
 
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -30,10 +31,12 @@ function App(props) {
   const [isOkStatus, setStatus] = React.useState(false);
   const [email, setEmail] = React.useState("");
   
+  
   React.useEffect(() => {
     const checkToken = () => {
       if (localStorage.getItem("token")){
         const token = localStorage.getItem("token")
+        console.log(token)
         newAuth
         .getUserInfo(token)
         .then((res) => {
@@ -80,9 +83,11 @@ function App(props) {
       console.log(res)
       setStatus(true);
       setInfoTooltipOpen(true);
-      localStorage.setItem("token", res.token);
       handleLogin(true);
       setEmail(email);
+      console.log(res.token)
+      localStorage.setItem("token", res.token);
+      console.log(localStorage.getItem("token"))
       props.history.push("/");
       closeAllPopups();
       

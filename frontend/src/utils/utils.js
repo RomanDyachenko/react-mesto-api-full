@@ -73,14 +73,13 @@ const objectValidation = {
   },
 ];*/
 
-const BaseUrl = "https://nomoreparties.co/v1/cohort-41/";
+const BaseUrl = "http://localhost:3000";
 
 const Headers = {
-  authorization: "75fdb49e-7217-4f03-ae58-c16a91160381",
   "Content-Type": "application/json",
 };
 
-const authBaseUrl = "https://auth.nomoreparties.co";
+const authBaseUrl = "http://localhost:3000";
 
 const authHeaders = {"Content-Type": "application/json"} ;
 

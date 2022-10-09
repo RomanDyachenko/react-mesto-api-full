@@ -22,8 +22,8 @@ class Auth {
             headers: this._authHeaders,
             body: JSON.stringify(
                 {
-                "password": `${password}`,
-                "email": `${email}`
+                "email": `${email}`,
+                "password": `${password}`
             }
             )
         }
@@ -57,7 +57,6 @@ class Auth {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization" : `Bearer ${jwt}`
             }
         }
         )

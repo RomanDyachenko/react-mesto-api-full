@@ -63,7 +63,7 @@ const login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, 'some-secret', { expiresIn: '7d' });
       res.cookie('jwt', token, { maxAge: 3600000 * 24 * 7, httpOnly: true, sameSite: true })
-        .send({ message: `Вы успешно вошли. Ваша почта для входа: ${user.email}` });
+        .send({ message: `Вы успешно вошли. Ваша почта для входа: ${user.email}`, token: user._id });
     })
     .catch(next);
 };

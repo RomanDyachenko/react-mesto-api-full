@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       validate: {
         validator(v) {
-          return /https?:\/\/w?w?w?\.?[a-z0-9\W]+\.ru\/?[a-z0-9\W]*$/i.test(v);
+          return /https?:\/\/w?w?w?\.?[a-z0-9\W]+\.[a-z]{2}/i.test(v);
         },
         message: (props) => `${props.value} не прошла валидацию`,
       },

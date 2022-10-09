@@ -1,5 +1,7 @@
 import { BaseUrl, Headers } from "./utils.js";
 
+
+
 class Api {
   constructor(baseUrl, headers) {
     this._baseUrl = baseUrl;
@@ -18,9 +20,6 @@ class Api {
   getCardsInfo = (url) => {
     return fetch(`${this._baseUrl}${url}`, {
       method: "GET",
-      headers: {
-        authorization: this._authorization,
-      },
     }).then((res) => {
       return this._returnResult(res);
     });
@@ -29,9 +28,6 @@ class Api {
   getUserInfo = (url) => {
     return fetch(`${this._baseUrl}${url}`, {
       method: "GET",
-      headers: {
-        authorization: this._authorization,
-      },
     }).then((res) => {
       return this._returnResult(res);
     });
