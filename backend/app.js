@@ -8,6 +8,7 @@ const cards = require('./routes/cards');
 const { postNewUser, login } = require('./controllers/users');
 const NotFoundError = require('./errors/NotFoundError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const handlerCors = require('./middlewares/handlerCors');
 
 const { PORT = 3000 } = process.env;
 
@@ -29,7 +30,7 @@ app.use(cookieParser());
 
 app.use(requestLogger);
 
-app.post('/signup', express.json(), celebrate({
+app.post('/signup', express.json(), handlerCors, celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30),
     about: Joi.string().min(2).max(30),
@@ -39,26 +40,26 @@ app.post('/signup', express.json(), celebrate({
   }),
 }), postNewUser);
 
-app.post('/signin', express.json(), celebrate({
+app.post('/signin', express.json(), handlerCors, celebrate({
   body: Joi.object().keys({
     email: Joi.string().email().required(),
     password: Joi.string().required(),
   }),
 }), login);
 
-app.use('/users', auth, users);
+app.use('/users', handlerCors, auth, users);
 
-app.use('/cards', auth, cards);
+app.use('/cards', handlerCors, auth, cards);
 
 app.use(errorLogger);
 
-app.use(auth, ((req, res, next) => {
+app.use(handlerCors, auth, ((req, res, next) => {
   next(new NotFoundError('Маршрут не найден'));
 }));
 
 app.use(errors());
 
-app.use((err, req, res, next) => {
+app.use(handlerCors, (err, req, res, next) => {
   const { statusCode = 500, message } = err;
 
   res.status(statusCode).send({
