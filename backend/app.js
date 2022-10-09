@@ -9,6 +9,7 @@ const { postNewUser, login } = require('./controllers/users');
 const NotFoundError = require('./errors/NotFoundError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { handleCors } = require('./middlewares/handlerCors');
+require('dotenv').config();
 
 const { PORT = 3000 } = process.env;
 
@@ -31,6 +32,12 @@ app.use(handleCors);
 app.use(cookieParser());
 
 app.use(requestLogger);
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 app.post('/signup', express.json(), celebrate({
   body: Joi.object().keys({

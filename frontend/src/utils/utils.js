@@ -73,13 +73,13 @@ const objectValidation = {
   },
 ];*/
 
-const BaseUrl = "http://localhost:3000";
+const BaseUrl = "https://api.dyachenkoroman.nomoredomains.icu/";
 
 const Headers = {
   "Content-Type": "application/json",
 };
 
-const authBaseUrl = "http://localhost:3000";
+const authBaseUrl = "https://api.dyachenkoroman.nomoredomains.icu/";
 
 const authHeaders = {"Content-Type": "application/json"} ;
 
