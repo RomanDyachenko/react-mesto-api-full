@@ -5,4 +5,4 @@
 
 https://api.dyachenkoroman.nomoredomains.icu/
 https://dyachenkoroman.nomoredomains.icu/
-84.252.143.80
+51.250.108.20
