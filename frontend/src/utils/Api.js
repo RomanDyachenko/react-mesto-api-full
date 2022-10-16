@@ -1,12 +1,8 @@
-import { BaseUrl, Headers } from "./utils.js";
-
-
+import { BaseUrl } from "./utils.js";
 
 class Api {
-  constructor(baseUrl, headers) {
+  constructor(baseUrl) {
     this._baseUrl = baseUrl;
-    this._headers = headers;
-    this._authorization = this._headers.authorization;
   }
 
   _returnResult = (res) => {
@@ -17,86 +13,101 @@ class Api {
     return Promise.reject("Something gone wrong");
   };
 
-  getCardsInfo = (url) => {
+  getCardsInfo = (url, token) => {
     return fetch(`${this._baseUrl}${url}`, {
       method: "GET",
-    }).then((res) => {
-      return this._returnResult(res);
-    });
-  };
-
-  getUserInfo = (url) => {
-    return fetch(`${this._baseUrl}${url}`, {
-      method: "GET",
-    }).then((res) => {
-      return this._returnResult(res);
-    });
-  };
-
-  patchNewInfo = (url, body) => {
-    return fetch(`${this._baseUrl}${url}`, {
-      method: "PATCH",
-      headers: this._headers,
-      body: JSON.stringify(body),
-    }).then((res) => {
-      return this._returnResult(res);
-    });
-  };
-  postNewCard = (url, body) => {
-    return fetch(`${this._baseUrl}${url}`, {
-      method: "POST",
-      headers: this._headers,
-      body: JSON.stringify(body),
-    }).then((res) => {
-      return this._returnResult(res);
-    });
-  };
-
-  deleteCard = (url) => {
-    return fetch(`${this._baseUrl}${url}`, {
-      method: "DELETE",
       headers: {
-        authorization: this._authorization,
+        authorization: token
       },
     }).then((res) => {
       return this._returnResult(res);
     });
   };
 
-  changeLikeCardStatus = (url, isLiked) => {
+  getUserInfo = (url, token) => {
+    return fetch(`${this._baseUrl}${url}`, {
+      method: "GET",
+      headers: {
+        authorization: token
+      },
+    }).then((res) => {
+      return this._returnResult(res);
+    });
+  };
+
+  patchNewInfo = (url, body, token) => {
+    return fetch(`${this._baseUrl}${url}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: token
+      },
+      body: JSON.stringify(body),
+    }).then((res) => {
+      return this._returnResult(res);
+    });
+  };
+  postNewCard = (url, body, token) => {
+    return fetch(`${this._baseUrl}${url}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: token
+      },
+      body: JSON.stringify(body),
+    }).then((res) => {
+      return this._returnResult(res);
+    });
+  };
+
+  deleteCard = (url, token) => {
+    return fetch(`${this._baseUrl}${url}`, {
+      method: "DELETE",
+      headers: {
+        authorization: token
+      },
+    }).then((res) => {
+      return this._returnResult(res);
+    });
+  };
+
+  changeLikeCardStatus = (url, isLiked, token) => {
     if (isLiked) {
-      return this._deleteCardLike(url);
+      return this._deleteCardLike(url, token);
     } else {
-      return this._putCardLike(url);
+      return this._putCardLike(url, token);
     }
   };
 
-  _putCardLike = (url) => {
+  _putCardLike = (url, token) => {
     return fetch(`${this._baseUrl}${url}`, {
       method: "PUT",
       headers: {
-        authorization: this._authorization,
+        authorization: token
       },
     }).then((res) => {
       return this._returnResult(res);
     });
   };
 
-  _deleteCardLike = (url) => {
+  _deleteCardLike = (url, token) => {
     return fetch(`${this._baseUrl}${url}`, {
       method: "DELETE",
       headers: {
-        authorization: this._authorization,
+        authorization: token
       },
     }).then((res) => {
       return this._returnResult(res);
     });
   };
 
-  changeAvatar = (url, body) => {
+  changeAvatar = (url, body, token) => {
     return fetch(`${this._baseUrl}${url}`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+        authorization: token
+      },
       body: JSON.stringify(body),
     }).then((res) => {
       return this._returnResult(res);

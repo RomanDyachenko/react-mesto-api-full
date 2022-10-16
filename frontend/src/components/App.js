@@ -16,7 +16,6 @@ import Register from "./Register.js";
 import { InfoTooltip } from "./InfoTooltip.js";
 import { ProtectedRoute } from "./ProtectedRoute.js";
 
-
 function App(props) {
 
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -30,13 +29,13 @@ function App(props) {
   const [isInfoTooltipOpen, setInfoTooltipOpen] = React.useState(false);
   const [isOkStatus, setStatus] = React.useState(false);
   const [email, setEmail] = React.useState("");
-  
+  const [token, setToken] = React.useState("");
   
   React.useEffect(() => {
     const checkToken = () => {
       if (localStorage.getItem("token")){
-        const token = localStorage.getItem("token")
-        console.log(token)
+        const token = localStorage.getItem("token");
+        setToken(token);
         newAuth
         .getUserInfo(token)
         .then((res) => {
@@ -50,7 +49,6 @@ function App(props) {
         .catch(() => {
           console.log("Ошибка!")
         })
-          
       }
     }
     checkToken();
@@ -83,11 +81,9 @@ function App(props) {
       console.log(res)
       setStatus(true);
       setInfoTooltipOpen(true);
+      localStorage.setItem("token", res.token);
       handleLogin(true);
       setEmail(email);
-      console.log(res.token)
-      localStorage.setItem("token", res.token);
-      console.log(localStorage.getItem("token"))
       props.history.push("/");
       closeAllPopups();
       
@@ -105,10 +101,9 @@ function App(props) {
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
-
     // Отправляем запрос в API и получаем обновлённые данные карточки
     newApi
-      .changeLikeCardStatus(`cards/${card._id}/likes`, isLiked)
+      .changeLikeCardStatus(`cards/${card._id}/likes`, isLiked, token)
       .then((newCard) => {
         setCards((state) =>
           state.map((c) => (c._id === card._id ? newCard : c))
@@ -136,8 +131,9 @@ function App(props) {
 
   React.useEffect(() => {
    
-    if(loggedIn){newApi
-      .getCardsInfo("cards")
+    if(loggedIn){
+      newApi
+      .getCardsInfo("cards", token)
       .then((res) => {
         setCards(res);
       })
@@ -147,8 +143,9 @@ function App(props) {
   }, [loggedIn]);
 
   React.useEffect(() => {
-    if(loggedIn){newApi
-      .getUserInfo("users/me")
+    if(loggedIn){
+      newApi
+      .getUserInfo("users/me", token)
       .then((res) => {
         setCurrentUser(res);
       })
@@ -183,7 +180,7 @@ function App(props) {
 
   function handleUpdateUser(obj) {
     newApi
-      .patchNewInfo("users/me", obj)
+      .patchNewInfo("users/me", obj, token)
       .then((res) => {
         setCurrentUser(res);
         closeAllPopups();
@@ -195,7 +192,7 @@ function App(props) {
 
   function handleUpdateAvatar(obj) {
     newApi
-      .changeAvatar("users/me/avatar", obj)
+      .changeAvatar("users/me/avatar", obj, token)
       .then((res) => {
         setCurrentUser(res);
         closeAllPopups();
@@ -207,7 +204,7 @@ function App(props) {
 
   function handleUpdateCards(obj) {
     newApi
-      .postNewCard("cards", obj)
+      .postNewCard("cards", obj, token)
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups();

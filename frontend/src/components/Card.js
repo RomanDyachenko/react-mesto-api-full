@@ -4,7 +4,7 @@ import React from "react";
 function Card(props) {
   const user = React.useContext(CurrentUserContext);
 
-  const isOwn = props.card.owner._id === user._id;
+  const isOwn = props.card._id === user._id;
 
   function handleClick() {
     props.onCardClick(props.card);

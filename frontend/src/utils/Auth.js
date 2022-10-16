@@ -1,9 +1,8 @@
-import { authBaseUrl, authHeaders } from "./utils";
+import { authBaseUrl } from "./utils";
 
 class Auth {
-    constructor(authBaseUrl, authHeaders){
+    constructor(authBaseUrl){
         this._authBaseUrl = authBaseUrl;
-        this._authHeaders = authHeaders;
     }
         
     _returnResult = (res) => {
@@ -19,11 +18,11 @@ class Auth {
         return fetch(`${this._authBaseUrl}/signup`,
         {
             method: "POST",
-            headers: this._authHeaders,
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify(
                 {
-                "email": `${email}`,
-                "password": `${password}`
+                "password": `${password}`,
+                "email": `${email}`
             }
             )
         }
@@ -37,7 +36,7 @@ class Auth {
         return fetch(`${this._authBaseUrl}/signin`,
         {
             method: "POST",
-            headers: this._authHeaders,
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify(
                 {
                     "password": password,
@@ -57,6 +56,7 @@ class Auth {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
+                authorization: jwt
             }
         }
         )
@@ -66,6 +66,6 @@ class Auth {
     }
 }
 
-const newAuth = new Auth(authBaseUrl, authHeaders);
+const newAuth = new Auth(authBaseUrl);
 
 export default newAuth;

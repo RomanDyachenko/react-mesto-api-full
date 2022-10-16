@@ -72,18 +72,16 @@ const objectValidation = {
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
   },
 ];*/
-
 const BaseUrl = "https://api.dyachenkoroman.nomoredomains.icu/";
 
-const Headers = {
-  "Content-Type": "application/json",
-};
+/*const Headers = "Content-Type": "application/json";*/
 
-const authBaseUrl = "https://api.dyachenkoroman.nomoredomains.icu/";
+const authBaseUrl = "https://api.dyachenkoroman.nomoredomains.icu";
+
+
 
 const authHeaders = {"Content-Type": "application/json"} ;
 
 export {
-  BaseUrl,
-  Headers, authBaseUrl, authHeaders /* profileAvatar, profileAvatarButton, popupAvatarId, popupAvatar, popupSubmitId, cardLikesNumberSelector, templateContainer, cardsSelector, objectValidation, initialCards, profileEditButton, popupEdit, popupEditCloseButton, profileName, popupEditName, profileEmployment, popupEditEmployment, popupEditForm, popupAdd, popupAddName, popupAddLink, profileAddButton, popupAddCloseButton, popupAddForm, popupFullSize, popupFullSizeImg, popupFullSizePlaceName, popupFullSizeCloseButton, popupAddId, popupEditId, objectUserInfo, popupFullSizeId*/,
+  BaseUrl, authBaseUrl /* profileAvatar, profileAvatarButton, popupAvatarId, popupAvatar, popupSubmitId, cardLikesNumberSelector, templateContainer, cardsSelector, objectValidation, initialCards, profileEditButton, popupEdit, popupEditCloseButton, profileName, popupEditName, profileEmployment, popupEditEmployment, popupEditForm, popupAdd, popupAddName, popupAddLink, profileAddButton, popupAddCloseButton, popupAddForm, popupFullSize, popupFullSizeImg, popupFullSizePlaceName, popupFullSizeCloseButton, popupAddId, popupEditId, objectUserInfo, popupFullSizeId*/,
 };
