@@ -15,7 +15,7 @@ class Auth {
     
 
     postNewUser = (password, email) => {
-        return fetch(`${this._authBaseUrl}signup`,
+        return fetch(`${this._authBaseUrl}/signup`,
         {
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -33,7 +33,7 @@ class Auth {
     }
 
     avtorizationUser = (password, email) => {
-        return fetch(`${this._authBaseUrl}signin`,
+        return fetch(`${this._authBaseUrl}/signin`,
         {
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -51,7 +51,7 @@ class Auth {
     }
 
     getUserInfo = (jwt) => {
-        return fetch (`${this._authBaseUrl}users/me`,
+        return fetch (`${this._authBaseUrl}/users/me`,
         {
             method: "GET",
             headers: {
