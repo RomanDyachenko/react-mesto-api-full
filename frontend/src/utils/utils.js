@@ -72,8 +72,7 @@ const objectValidation = {
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
   },
 ];*/
-const BaseUrl = "https://api.dyachenkoroman.nomoredomains.icu/";
-
+const BaseUrl = "https://api.dyachenkoroman.nomoredomains.icu/"
 /*const Headers = "Content-Type": "application/json";*/
 
 const authBaseUrl = "https://api.dyachenkoroman.nomoredomains.icu";

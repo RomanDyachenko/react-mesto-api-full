@@ -31,20 +31,23 @@ function App(props) {
   const [email, setEmail] = React.useState("");
   const [token, setToken] = React.useState("");
   
+  React.useEffect(() => { console.log(loggedIn) })
+ 
   React.useEffect(() => {
     const checkToken = () => {
       if (localStorage.getItem("token")){
         const token = localStorage.getItem("token");
-        setToken(token);
         newAuth
         .getUserInfo(token)
         .then((res) => {
-          console.log(res)
           if (res){
-          setLoggedIn(true)
+          setEmail(res.email);
+          handleToken(token);
           props.history.push("/")
           }
-          
+        })
+        .then(() => {
+          handleLogin(true);
         })
         .catch(() => {
           console.log("Ошибка!")
@@ -54,7 +57,9 @@ function App(props) {
     checkToken();
   }, [])
 
-  
+  function handleToken(e){
+    setToken(e);
+  }
 
   function handleRegisterSubmit(password, email){
     newAuth
@@ -78,15 +83,16 @@ function App(props) {
     newAuth
     .avtorizationUser(password, email)
     .then((res) => {
-      console.log(res)
+      localStorage.setItem("token", res.token);
+      handleToken(res.token);
+    })
+    .then(() => {
       setStatus(true);
       setInfoTooltipOpen(true);
-      localStorage.setItem("token", res.token);
-      handleLogin(true);
       setEmail(email);
+      handleLogin(true);
       props.history.push("/");
       closeAllPopups();
-      
     })
     .catch(() => {
       console.log("Ошибка!")
@@ -100,15 +106,15 @@ function App(props) {
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes?.some((i) => i === currentUser._id);
     // Отправляем запрос в API и получаем обновлённые данные карточки
     newApi
       .changeLikeCardStatus(`cards/${card._id}/likes`, isLiked, token)
       .then((newCard) => {
-        setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c))
-        );
-      })
+        setCards((state) => {
+          return state.map((c) => (c._id === card._id ? newCard : c))
+      }
+      );})
       .catch(() => {
         console.log("Произошла ошибка");
       });
@@ -116,13 +122,13 @@ function App(props) {
 
   function handleCardDelete(card) {
     newApi
-      .deleteCard(`cards/${card._id}`)
+      .deleteCard(`cards/${card._id}`, token)
       .then(() => {
-        setCards((state) =>
-          state.map((c) =>
-            c._id === card._id ? state.splice(state.indexOf(c), 1) : c
+        setCards((state) => 
+          state.filter((c) =>
+            c._id !== card._id 
           )
-        );
+      )
       })
       .catch(() => {
         console.log("Произошла ошибка");
@@ -135,7 +141,8 @@ function App(props) {
       newApi
       .getCardsInfo("cards", token)
       .then((res) => {
-        setCards(res);
+        const cards = res.reverse();
+        setCards(cards);
       })
       .catch(() => {
         console.log("Произошла ошибка");
@@ -222,6 +229,7 @@ function App(props) {
   function signOut(){
     localStorage.removeItem("token");
     handleLogin(false);
+    setToken("");
     props.history.push("/sign-in")
   }
 

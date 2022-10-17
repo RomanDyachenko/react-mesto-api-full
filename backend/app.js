@@ -60,11 +60,11 @@ app.use('/users', auth, users);
 
 app.use('/cards', auth, cards);
 
-app.use(errorLogger);
-
 app.use(auth, ((req, res, next) => {
   next(new NotFoundError('Маршрут не найден'));
 }));
+
+app.use(errorLogger);
 
 app.use(errors());
 

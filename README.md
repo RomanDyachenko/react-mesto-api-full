@@ -6,3 +6,4 @@
 https://api.dyachenkoroman.nomoredomains.icu/
 https://dyachenkoroman.nomoredomains.icu/
 51.250.108.20
+https://github.com/RomanDyachenko/react-mesto-api-full.git

@@ -1,5 +1,5 @@
-import Card from "./Card";
 import React from "react";
+import Card from "./Card";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 function Main(props) {
@@ -43,7 +43,7 @@ function Main(props) {
         ></button>
       </section>
       <section className="cards">
-        {props.cards.map((item) => {
+        {props.cards?.map((item) => {
           return (
             <Card
               card={item}
@@ -53,7 +53,8 @@ function Main(props) {
               onCardDelete={props.onCardDelete}
             />
           );
-        })}
+        })
+      }
       </section>
     </main>
   );

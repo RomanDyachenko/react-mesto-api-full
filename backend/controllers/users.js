@@ -25,7 +25,7 @@ const getOwnerInfo = (req, res, next) => {
 const getAllUsers = (req, res, next) => {
   User.find({})
     .then((users) => {
-      res.send({ users });
+      res.send(users);
     })
     .catch((err) => {
       next(err);
@@ -38,7 +38,7 @@ const findUserById = (req, res, next) => {
       if (!user) {
         next(new NotFoundError('Пользователь не найден'));
       }
-      res.send({ data: user });
+      res.send(user);
     })
     .catch((err) => {
       next(err);
@@ -81,9 +81,7 @@ const postNewUser = (req, res, next) => {
     // eslint-disable-next-line no-unused-vars
     .then((user) => {
       res.send({
-        data: {
-          name, about, avatar, email,
-        },
+        name, about, avatar, email,
       });
     })
     .catch((err) => {
@@ -114,9 +112,7 @@ const updateOwnerProfile = (req, res, next) => {
       if (!user) {
         next(new NotFoundError('Пользователь с данным _id не найден'));
       }
-      res.send({
-        data: user,
-      });
+      res.send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -141,9 +137,7 @@ const updateOwnerAvatar = (req, res, next) => {
       if (!user) {
         next(new NotFoundError('Пользователь с данным _id не найден'));
       }
-      res.send({
-        data: user,
-      });
+      res.send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {

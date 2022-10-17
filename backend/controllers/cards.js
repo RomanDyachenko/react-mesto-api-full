@@ -21,9 +21,7 @@ const deleteCard = async (req, res, next) => {
     }
     if ((card.owner.equals(req.user._id))) {
       const id = await Card.findByIdAndRemove(req.params.id);
-      res.send({
-        data: id,
-      });
+      res.send(id);
       return;
     }
     throw new ForbiddenError('Нет прав для удаления карточки');
@@ -36,9 +34,7 @@ const postNewCard = (req, res, next) => {
   const { name, link } = req.body;
   Card.create({ name, link, owner: req.user._id })
     .then((card) => {
-      res.send(
-        { data: card },
-      );
+      res.send(card);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -59,7 +55,7 @@ const likeCard = async (req, res, next) => {
     if (!id) {
       throw new NotFoundError('Пользователь с данным _id не найден');
     }
-    res.send({ data: id });
+    res.send(id);
   } catch (err) {
     if (err.name === 'CastError') {
       const badRequestError = new BadRequestError('Переданы некорректные данные для постановки лайка');
@@ -81,7 +77,7 @@ const dislikeCard = async (req, res, next) => {
     if (!id) {
       throw new NotFoundError('Пользователь с данным _id не найден');
     }
-    res.send({ data: id });
+    res.send(id);
   } catch (err) {
     if (err.name === 'CastError') {
       const badRequestError = new BadRequestError('Переданы некорректные данные для снятия лайка');

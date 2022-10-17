@@ -1,10 +1,10 @@
-import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import React from "react";
+import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 function Card(props) {
   const user = React.useContext(CurrentUserContext);
 
-  const isOwn = props.card._id === user._id;
+  const isOwn = props.card.owner === user._id;
 
   function handleClick() {
     props.onCardClick(props.card);
@@ -39,13 +39,13 @@ function Card(props) {
           <button
             type="button"
             className={`cards__like-button ${
-              props.card.likes.some((i) => {
-                return i._id === user._id;
+              props.card.likes?.some((i) => {
+                return i === user._id;
               }) && "cards__like-button_active"
             }`}
             onClick={handleLikeClick}
           />
-          <div className="cards__like-numbers">{props.card.likes.length}</div>
+          <div className="cards__like-numbers">{props.card.likes?.length}</div>
         </div>
       </div>
     </div>
