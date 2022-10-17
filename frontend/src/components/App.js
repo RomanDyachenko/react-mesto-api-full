@@ -19,8 +19,7 @@ import { ProtectedRoute } from "./ProtectedRoute.js";
 function App(props) {
 
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const [isEditProfilePopupOpen, setEditProfilePopupOpen] =
-    React.useState(false);
+  const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
@@ -30,8 +29,6 @@ function App(props) {
   const [isOkStatus, setStatus] = React.useState(false);
   const [email, setEmail] = React.useState("");
   const [token, setToken] = React.useState("");
-  
-  React.useEffect(() => { console.log(loggedIn) })
  
   React.useEffect(() => {
     const checkToken = () => {
